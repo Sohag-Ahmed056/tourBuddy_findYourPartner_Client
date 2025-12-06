@@ -1,9 +1,11 @@
+import TravelDetails from '@/components/travel/travelDetails'
 import React from 'react'
 
-const page = () => {
+const TravelPlanDetailsPage = (params: any) => {
   return (
-    <div>page</div>
+    <TravelDetails {...params} />
   )
 }
 
-export default page
+
+export default TravelPlanDetailsPage

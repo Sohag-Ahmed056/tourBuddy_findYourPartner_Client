@@ -1,3 +1,4 @@
+import CreateTravelPlanFormDialog from "@/components/travel/createTravelPlanFormDialog";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ui/modeToggle";
 import Image from "next/image";
@@ -8,6 +9,7 @@ export default function Home() {
       
 
       <Button>Hello</Button>
+      <CreateTravelPlanFormDialog />
 
 
       <div className="mt-11">

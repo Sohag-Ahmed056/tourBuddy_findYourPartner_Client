@@ -1,9 +1,11 @@
+import TravelPlans from '@/components/travel/travel'
 import React from 'react'
 
-const page = () => {
+const TravelPlansPage = () => {
   return (
-    <div>page</div>
+   
+    <TravelPlans />
   )
 }
 
-export default page
+export default TravelPlansPage
