@@ -8,7 +8,7 @@ export default function Sidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const menuItems = [
-    { id: "dashboard", icon: Home, label: "Dashboard", href: "/" },
+    { id: "dashboard", icon: Home, label: "Home", href: "/" },
     { id: "travel-plans", icon: MapPin, label: "Travel Plans", href: "/dashboard/getMytravelplans" },
     { id: "join-requests-received", icon: Inbox, label: "Join Requests", href: "/dashboard/receivedJoinrequest" },
     { id: "join-requests-sent", icon: Send, label: "Sent Requests", href: "/dashboard/sendJoinrequest" },

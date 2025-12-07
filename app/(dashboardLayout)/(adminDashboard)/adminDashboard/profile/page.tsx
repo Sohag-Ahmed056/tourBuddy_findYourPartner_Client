@@ -1,9 +1,11 @@
-import React from 'react'
 
-const page = () => {
+const AdminProfilepage = () => {
   return (
-    <div>page</div>
+    <div>
+      <h1>Hey Admin you can control All</h1>
+
+    </div>
   )
 }
 
-export default page
+export default AdminProfilepage;

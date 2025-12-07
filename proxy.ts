@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
 // Public routes
-const publicRoutes = ["/login", "/register", "/"];
+const publicRoutes = ["/login", "/register", "/", "/price", "/travel-plans"];
 
 export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
@@ -41,8 +41,8 @@ export async function proxy(req: NextRequest) {
 
   // Role-based access
   const roleGroups: Record<string, string[]> = {
-    ADMIN: ["/admin-dashboard", "/travel-plans"],
-    TOURIST: ["/dashboard", "/travel-plans"],
+    ADMIN: ["/admin-dashboard"],
+    TOURIST: ["/dashboard"],
   };
 
   for (const role in roleGroups) {
@@ -59,9 +59,9 @@ export async function proxy(req: NextRequest) {
   return NextResponse.next();
 }
 
-// Helper to get dashboard based on role
-function getDashboard(role: string | null) {
-  if (role === "TOURIST") return "/adminDashboard";
-  if (role === "TOURIST") return "/travel-plans";
+// Helper to get dashboard based on role - FIXED
+export function getDashboard(role: string | null) {
+  if (role === "ADMIN") return "/adminDashboard";
+  if (role === "TOURIST") return "/dashboard";
   return "/";
 }

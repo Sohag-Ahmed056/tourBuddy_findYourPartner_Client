@@ -20,7 +20,7 @@ import { ProfileIcon } from "./profileIcon";
 const navigationLinks = [
   { href: "/", label: "Home" },
   { href: "/travel-plans", label: "Travel Plans" },
-  { href: "/pricing", label: "Pricing" },
+  { href: "/price", label: "Pricing" },
   { href: "/about", label: "About" },
 ];
 
