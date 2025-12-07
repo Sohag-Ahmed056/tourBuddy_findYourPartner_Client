@@ -32,7 +32,7 @@ export function UpdateProfileButton({ profile }: { profile: any }) {
     fullName: profile.fullName || '',
     bio: profile.bio || '',
     currentLocation: profile.currentLocation || '',
-    visitedCountries: profile.visitedCountries || 0,
+    visitedCountries: profile.visitedCountries?.join(', ') || '',
     interests: profile.interests?.join(', ') || '',
     profileImage: profile.profileImage || '',
   })
@@ -131,7 +131,7 @@ export function UpdateProfileButton({ profile }: { profile: any }) {
             <Label htmlFor="visitedCountries">Visited Countries</Label>
             <Input
               id="visitedCountries"
-              type="number"
+             
               min="0"
               value={formData.visitedCountries}
               onChange={(e) => handleChange('visitedCountries', e.target.value)}

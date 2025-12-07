@@ -61,7 +61,7 @@ export async function proxy(req: NextRequest) {
 
 // Helper to get dashboard based on role
 function getDashboard(role: string | null) {
-  if (role === "ADMIN") return "/admin-dashboard";
-  if (role === "TOURIST") return "/dashboard";
+  if (role === "TOURIST") return "/adminDashboard";
+  if (role === "TOURIST") return "/travel-plans";
   return "/";
 }

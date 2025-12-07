@@ -1,3 +1,5 @@
+"use server"
+
 import { cookies } from "next/headers";
 
 // http://localhost:5000/api/v1/user/my-profile

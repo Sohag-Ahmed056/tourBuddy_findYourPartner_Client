@@ -20,8 +20,8 @@ const updateUser = async (payload: any) => {
         cache: "no-store",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-          Cookie: `accessToken=${accessToken}`,
+          "Authorization": `Bearer ${accessToken}`,
+          "Cookie": `accessToken=${accessToken}`,
         },
         credentials: "include",
         body: JSON.stringify(payload),

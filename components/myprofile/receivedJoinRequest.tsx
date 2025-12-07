@@ -1,6 +1,7 @@
 import { getMyProfile } from "@/services/profile/myProfile";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
+import { JoinRequestDropdown } from "../join/joinRequestaccept";
 
 
 const ReceivedJoinrequest =async () => {
@@ -17,18 +18,7 @@ const ReceivedJoinrequest =async () => {
               Join Request • {new Date(req.createdAt).toLocaleDateString()}
             </CardTitle>
 
-            <Badge
-              variant={
-                req.status === "ACCEPTED"
-                  ? "default"
-                  : req.status === "REJECTED"
-                  ? "destructive"
-                  : "secondary"
-              }
-              className="uppercase"
-            >
-              {req.status}
-            </Badge>
+             <JoinRequestDropdown id={req.id} />
           </CardHeader>
 
           <CardContent>

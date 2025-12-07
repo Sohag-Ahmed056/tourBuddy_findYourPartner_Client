@@ -13,16 +13,22 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { ModeToggle } from "../ui/modeToggle";
+
+import { ProfileIcon } from "./profileIcon";
 
 const navigationLinks = [
   { href: "/", label: "Home" },
-  { href: "/features", label: "Features" },
+  { href: "/travel-plans", label: "Travel Plans" },
   { href: "/pricing", label: "Pricing" },
   { href: "/about", label: "About" },
 ];
 
-export default function Navbar() {
+export default  function Navbar() {
   const pathname = usePathname(); 
+
+
+    
 
   return (
     <header className="border-b px-4 md:px-6">
@@ -111,8 +117,10 @@ export default function Navbar() {
             <a href="/login">Sign In</a>
           </Button>
           <Button asChild size="sm">
-            <a href="#">Get Started</a>
+            <a href="/register">Get Started</a>
           </Button>
+           <ModeToggle />
+           <ProfileIcon />
         </div>
       </div>
     </header>
