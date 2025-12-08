@@ -12,7 +12,7 @@ export async function createPaymentSession(prevState: any, formData: FormData) {
   const price = Number(formData.get("price"));
 
   try {
-    const response = await fetch("http://localhost:5000/api/v1/payment/subscribe", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/payment/subscribe`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

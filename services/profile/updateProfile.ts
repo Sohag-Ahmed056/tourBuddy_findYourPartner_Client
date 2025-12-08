@@ -14,7 +14,7 @@ const updateUser = async (payload: any) => {
 
   try {
     const response = await fetch(
-      `http://localhost:5000/api/v1/user/update-user`, // Adjust endpoint as needed
+      `${process.env.NEXT_PUBLIC_API_URL}api/v1/user/update-user`, // Adjust endpoint as needed
       {
         method: "PUT",
         cache: "no-store",

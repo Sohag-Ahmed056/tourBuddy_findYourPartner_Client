@@ -9,7 +9,7 @@ const deleteTravel = async (id: string) => {
 
 
   const response = await fetch(
-    `http://localhost:5000/api/v1/travel/delete-travel-plan/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/v1/travel/delete-travel-plan/${id}`,
     {
       method: "DELETE",
       cache: "no-store",

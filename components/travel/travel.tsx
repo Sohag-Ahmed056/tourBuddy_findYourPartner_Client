@@ -4,71 +4,110 @@ import Link from "next/link";
 import getAllTravelPlans from "@/services/travels/getAllTravel";
 import JoinDialog from "../join/Sendjoin";
 import ReviewDialog from "../review/Review";
+import { Button } from "../ui/button";
+import { Calendar, Compass, MapPin, Wallet } from "lucide-react";
+import { Badge } from "../ui/badge";
 
 export default async function TravelPlans() {
   const { success, data } = await getAllTravelPlans();
+  const plans = data.data;
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+    });
+  };
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 0,
+    }).format(amount);
+  };
+
+  const getInitials = (name: string) => {
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase();
+  };
+
 
   if (!success) return <div>Error loading travel plans...</div>;
-
+  
   return (
-    <div className="p-6  ">
-      <h1 className="text-3xl font-bold text-center tracking-tight mb-6">
-        All Travel Plans
-      </h1>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {plans.map((plan: any) => (
+         <Card key={plan.id} className="group overflow-hidden border-border/50 shadow-sm hover:shadow-lg transition-all duration-300 hover:border-primary/20">
+      {/* Card Header */}
+      <CardHeader className="pb-3 space-y-3">
+        <div className="flex items-start justify-between gap-2">
+          <div className="space-y-1 flex-1">
+            <h2 className="font-display text-xl font-bold text-foreground line-clamp-1 group-hover:text-primary transition-colors">
+              {plan.title}
+            </h2>
+            <div className="flex items-center gap-1.5 text-muted-foreground">
+              <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
+              <span className="text-sm">{plan.city}, {plan.destination}</span>
+            </div>
+          </div>
+          <Badge variant="secondary" className="flex-shrink-0">
+            <Compass className="w-3 h-3 mr-1" />
+            {plan.travelType}
+          </Badge>
+        </div>
+      </CardHeader>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {data?.data.map((plan: any) => (
-          <Card
-            key={plan.id}
-            className="border border-gray-200 shadow-sm hover:shadow-md transition rounded-2xl"
-          >
-            <CardHeader>
-              <h2 className="text-xl font-semibold">{plan.title}</h2>
-              <h2 className="text-sm text-gray-500">ID: {plan.id}</h2>
-              <p className="text-sm text-gray-500">
-                {plan.city}, {plan.destination}
+      {/* Card Content */}
+      <CardContent className="space-y-4 pb-4">
+        {/* Dates & Budget */}
+        <div className="grid grid-cols-2 gap-3">
+          <div className="flex items-center gap-2 p-2.5 rounded-lg bg-muted/50">
+            <Calendar className="w-4 h-4 text-primary flex-shrink-0" />
+            <div className="min-w-0">
+              <p className="text-xs text-muted-foreground">Dates</p>
+              <p className="text-sm font-medium text-foreground truncate">
+                {formatDate(plan.startDate)} – {formatDate(plan.endDate)}
               </p>
-            </CardHeader>
-
-            <CardContent className="space-y-3">
-              <p className="text-sm">
-                <span className="font-medium">Dates:</span>{" "}
-                {new Date(plan.startDate).toLocaleDateString()} –{" "}
-                {new Date(plan.endDate).toLocaleDateString()}
+            </div>
+          </div>
+          <div className="flex items-center gap-2 p-2.5 rounded-lg bg-muted/50">
+            <Wallet className="w-4 h-4 text-secondary flex-shrink-0" />
+            <div className="min-w-0">
+              <p className="text-xs text-muted-foreground">Budget</p>
+              <p className="text-sm font-medium text-foreground truncate">
+                {formatCurrency(plan.budgetMin)} – {formatCurrency(plan.budgetMax)}
               </p>
+            </div>
+          </div>
+        </div>
 
-              <p className="text-sm">
-                <span className="font-medium">Budget:</span>{" "}
-                {plan.budgetMin} – {plan.budgetMax}
-              </p>
+        {/* Description */}
+        <p className="text-sm text-muted-foreground line-clamp-3 leading-relaxed">
+          {plan.description}
+        </p>
 
-              <p className="text-sm">
-                <span className="font-medium">Travel Type:</span>{" "}
-                {plan.travelType}
-              </p>
+        {/* Traveller Info */}
+        <div className="flex items-center gap-3 pt-1 border-t border-border/50">
+          <Avatar className="h-9 w-9 border-2 border-background shadow-sm">
+            <AvatarImage src={plan.tourist.profileImage} alt={plan.tourist.fullName} />
+            <AvatarFallback className="bg-primary text-primary-foreground text-xs font-medium">
+              {getInitials(plan.tourist.fullName)}
+            </AvatarFallback>
+          </Avatar>
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-medium text-foreground truncate">{plan.tourist.fullName}</p>
+            <p className="text-xs text-muted-foreground truncate">{plan.tourist.currentLocation}</p>
+          </div>
+        </div>
+      </CardContent>
 
-              <p className="text-sm line-clamp-3 text-gray-600">
-                {plan.description}
-              </p>
-
-              <div className="flex items-center gap-3 pt-2">
-                <Avatar className="h-10 w-10">
-                  <AvatarImage
-                    src={plan.tourist.profileImage}
-                    alt={plan.tourist.fullName}
-                  />
-                  <AvatarFallback>
-                    {plan.tourist.fullName?.slice(0, 2).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-                <span className="text-sm font-medium">
-                  {plan.tourist.fullName}
-                </span>
-              </div>
-            </CardContent>
-
-            <CardFooter>
-              <Link
+      {/* Card Footer */}
+      <CardFooter className="pt-0 gap-2">
+          <Link
                 href={`/travel-plans/${plan.id}`}
                 className="w-full"
               >
@@ -81,12 +120,12 @@ export default async function TravelPlans() {
                  <JoinDialog id={plan.id} />
                </div>
                   <div className="w-full ">
-                 <ReviewDialog id={plan.id} /> 
+                    <ReviewDialog id={plan.id} />
+                 
                </div>
-            </CardFooter>
-          </Card>
-        ))}
-      </div>
+      </CardFooter>
+    </Card>
+      ))}
     </div>
   );
 }

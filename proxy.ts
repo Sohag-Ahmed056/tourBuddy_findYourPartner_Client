@@ -8,7 +8,7 @@ export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   const accessToken = req.cookies.get("accessToken")?.value;
-  console.log("Access Token in Middleware:", accessToken);
+
   let userRole: string | null = null;
 
   // Decode JWT if exists
@@ -41,7 +41,7 @@ export async function proxy(req: NextRequest) {
 
   // Role-based access
   const roleGroups: Record<string, string[]> = {
-    ADMIN: ["/admin-dashboard"],
+    ADMIN: ["/adminDashboard"],
     TOURIST: ["/dashboard"],
   };
 

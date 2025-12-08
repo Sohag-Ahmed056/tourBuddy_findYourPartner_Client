@@ -9,7 +9,7 @@ export const getMyProfile = async () => {
         const accessToken = cookieStore.get("accessToken")?.value || "";
     
     const res = await fetch(
-        "http://localhost:5000/api/v1/user/my-profile",
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/my-profile`,
         {
             method: "GET",
             cache: "no-store",

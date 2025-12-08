@@ -14,7 +14,7 @@ const updateTravel = async (travelPlanId: string, payload: any) => {
 
   try {
     const response = await fetch(
-      `http://localhost:5000/api/v1/travel/update-travel-plan/${travelPlanId}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/travel/update-travel-plan/${travelPlanId}`,
       {
         method: "PUT", // or PUT depending on your backend
         cache: "no-store",

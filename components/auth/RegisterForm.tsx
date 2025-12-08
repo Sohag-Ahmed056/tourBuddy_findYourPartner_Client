@@ -24,7 +24,7 @@ export function RegisterForm({
   const [showPassword, setShowPassword] = useState(false);
 
   const [state, formAction, isPending] = useActionState(registerUser, null);
-  console.log("RegisterForm state:", state);
+
 
   // 🧠 Trigger toast when state changes
   useEffect(() => {

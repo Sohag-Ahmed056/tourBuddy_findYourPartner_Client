@@ -14,7 +14,7 @@ export const sendJoinRequest = async (_currentState: any, formData: FormData) =>
   const accessToken = cookieStore.get("accessToken")?.value || "";
 
   try {
-    const response = await fetch('http://localhost:5000/api/v1/join/join-request', {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}api/v1/join/join-request`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

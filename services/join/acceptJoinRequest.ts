@@ -19,7 +19,7 @@ export async function handleJoinRequest(formData: FormData) {
   }
   
   try {
-    const response = await fetch('http://localhost:5000/api/v1/join/join-request/respond', {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/join/join-request/respond`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

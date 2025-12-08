@@ -9,7 +9,7 @@ const getAllUser = async () => {
 
 
   const response = await fetch(
-    "http://localhost:5000/api/v1/user/all",
+    `${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/all`,
     {
       method: "GET",
       cache: "no-store",

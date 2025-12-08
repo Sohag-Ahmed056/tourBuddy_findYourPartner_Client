@@ -15,7 +15,7 @@
       visibility: true,
     };
 
-    const res =  await fetch("http://localhost:5000/api/v1/travel/create-travel-plan", {
+    const res =  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/travel/create-travel-plan`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

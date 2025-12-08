@@ -16,9 +16,13 @@ export default function Home() {
       </div>
 
       {/* Centered Travel Plans */}
-      <div className="w-full flex justify-center">
-        <TravelPlans />
-      </div>
+         
+       <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
+            <h1 className=" mb-8 font-display text-3xl md:text-4xl text text-center font-bold text-foreground tracking-tight">
+              All Travel Plans
+            </h1>
+              <TravelPlans />
+            </div>
       <div className="w-full flex flex-col items-center justify-center mt-12 mb-12">
         <Footer />
       </div>
