@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -14,8 +14,9 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { ModeToggle } from "../ui/modeToggle";
-
 import { ProfileIcon } from "./profileIcon";
+import { decodeUser } from "@/services/profile/decodeUser";
+import { useEffect, useState } from "react";
 
 const navigationLinks = [
   { href: "/", label: "Home" },
@@ -24,11 +25,29 @@ const navigationLinks = [
   { href: "/about", label: "About" },
 ];
 
-export default  function Navbar() {
-  const pathname = usePathname(); 
+export default function Navbar() {
+  const pathname = usePathname();
+  const router = useRouter();
+  const [user, setUser] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const decoded = await decodeUser();
+        setUser(decoded);
+      } catch (error) {
+        console.error("Failed to fetch user:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchUser();
+  }, []);
 
 
-    
+  // Extract username from email (before @)
+  const username = user?.fullName;
 
   return (
     <header className="border-b px-4 md:px-6">
@@ -43,7 +62,6 @@ export default  function Navbar() {
                 size="icon"
                 variant="ghost"
               >
-                {/* mobile icon */}
                 <svg
                   className="pointer-events-none"
                   fill="none"
@@ -71,7 +89,7 @@ export default  function Navbar() {
                         href={link.href}
                         className={`py-1.5 ${
                           pathname === link.href
-                            ? "text-red-500 font-semibold" // ACTIVE
+                            ? "text-red-500 font-semibold"
                             : "text-muted-foreground hover:text-primary"
                         }`}
                       >
@@ -98,7 +116,7 @@ export default  function Navbar() {
                       href={link.href}
                       className={`py-1.5 font-medium ${
                         pathname === link.href
-                          ? "text-primary" // ACTIVE
+                          ? "text-primary"
                           : "text-muted-foreground hover:text-primary"
                       }`}
                     >
@@ -113,14 +131,38 @@ export default  function Navbar() {
 
         {/* Right side */}
         <div className="flex items-center gap-2">
-          <Button asChild size="sm" variant="ghost">
-            <a href="/login">Sign In</a>
-          </Button>
-          <Button asChild size="sm">
-            <a href="/register">Get Started</a>
-          </Button>
-           <ModeToggle />
-           <ProfileIcon />
+          {!isLoading && (
+            <>
+              {user ? (
+                // Authenticated user UI
+                <>
+                  <span className="text-sm  font-extrabold text-foreground hidden sm:inline">
+                    Hi, {username}
+                  </span>
+                  <Button 
+                    size="sm" 
+                    variant="ghost"
+                    className="font-extrabold border-2"
+                   
+                  >
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                // Guest user UI
+                <>
+                  <Button asChild size="sm" variant="ghost">
+                    <a href="/login">Sign In</a>
+                  </Button>
+                  <Button asChild size="sm">
+                    <a href="/register">Get Started</a>
+                  </Button>
+                </>
+              )}
+            </>
+          )}
+          <ModeToggle />
+          {user && <ProfileIcon profile={user} />}
         </div>
       </div>
     </header>

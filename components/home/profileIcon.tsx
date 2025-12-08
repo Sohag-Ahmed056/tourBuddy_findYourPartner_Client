@@ -15,20 +15,19 @@ import ProfileAvatar from "../ui/profileAvatar";
 // };
  
 
- export const ProfileIcon =(profile: any) => {
+export const ProfileIcon = ({ profile }: { profile: any }) => {
+  // Early return if no profile data
+  if (!profile) {
+    return null;
+  }
 
-    
   return (
-    <div className=" rounded-2xl bg-white">
-      
-        <div className="flex items-center justify-center gap-6">
-    
-          <div className="flex flex-col items-center gap-2">
-            <ProfileAvatar profile={profile} />
-           
-          </div>
+    <div className="rounded-2xl bg-white">
+      <div className="flex items-center justify-center gap-6">
+        <div className="flex flex-col items-center gap-2">
+          <ProfileAvatar profile={profile} />
         </div>
       </div>
-  
+    </div>
   );
 };

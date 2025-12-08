@@ -1,17 +1,26 @@
-import { getMyProfile } from '@/services/profile/myProfile';
-import React from 'react'
-import { ProfileIcon } from './profileIcon';
+// import { getMyProfile } from '@/services/profile/myProfile';
+// import React from 'react'
+// import { ProfileIcon } from './profileIcon';
 
-const ProfileInfo =async () => {
-    const{data,success} = await getMyProfile();
-        const profile = data?.data?.profile;
+// const ProfileInfo =async () => {
+   
 
 
-  return (
-    <ProfileIcon profile={profile} />
+//   return (
+//     <ProfileIcon profile={profile} />
     
 
+//   )
+// }
+
+// export default ProfileInfo
+
+import React from 'react'
+
+const profileInfo = () => {
+  return (
+    <div>profileInfo</div>
   )
 }
 
-export default ProfileInfo
+export default profileInfo

@@ -1,5 +1,7 @@
+import WhyChooseUs from "@/components/home/Choose";
 import { Footer } from "@/components/home/Footer";
-import { TravelHero } from "@/components/home/Hero";
+import TravelHero from "@/components/home/Hero";
+
 import CreateTravelPlanFormDialog from "@/components/travel/createTravelPlanFormDialog";
 import TravelPlans from "@/components/travel/travel";
 import { Button } from "@/components/ui/button";
@@ -22,6 +24,10 @@ export default function Home() {
               All Travel Plans
             </h1>
               <TravelPlans />
+            </div>
+
+            <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
+              <WhyChooseUs />
             </div>
       <div className="w-full flex flex-col items-center justify-center mt-12 mb-12">
         <Footer />

@@ -1,4 +1,4 @@
-export function TravelHero() {
+ function TravelHero() {
   return (
     <section className="relative max-w-6xl mx-auto w-full h-[60vh] md:h-[70vh] rounded-3xl overflow-hidden mb-12 mt-12 shadow-lg">
       {/* Dark gradient background */}
@@ -21,3 +21,4 @@ export function TravelHero() {
     </section>
   );
 }
+export default TravelHero
