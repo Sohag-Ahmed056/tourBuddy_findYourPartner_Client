@@ -4,6 +4,7 @@ import TravelHero from "@/components/home/Hero";
 
 import CreateTravelPlanFormDialog from "@/components/travel/createTravelPlanFormDialog";
 import TravelPlans from "@/components/travel/travel";
+import TravelSearchFilter from "@/components/travel/travelSearchFilter";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/ui/modeToggle";
 import Image from "next/image";
@@ -25,7 +26,7 @@ export default function Home() {
             </h1>
               <TravelPlans />
             </div>
-
+         
             <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
               <WhyChooseUs />
             </div>

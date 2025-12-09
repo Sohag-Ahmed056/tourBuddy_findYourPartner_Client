@@ -16,13 +16,19 @@ const Profile = async () => {
       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-8">
 
         {/* Profile Image */}
-        <div className="relative w-40 h-40 rounded-full overflow-hidden shadow-lg ring-4 ring-primary/20">
-          <Image
-            src={profile.profileImage}
-            alt={profile.fullName}
-            fill
-            className="object-cover"
-          />
+         <div className="relative w-40 h-40 rounded-full overflow-hidden shadow-lg ring-4 ring-primary/20">
+          {profile.profileImage ? (
+            <Image
+              src={profile.profileImage}
+              alt={profile.fullName}
+              fill
+              className="object-cover"
+            />
+          ) : (
+            <div className="w-full h-full bg-muted flex items-center justify-center">
+              <span className="text-muted-foreground">{profile.fullName}</span>
+            </div>
+          )}
         </div>
 
         {/* User Info */}

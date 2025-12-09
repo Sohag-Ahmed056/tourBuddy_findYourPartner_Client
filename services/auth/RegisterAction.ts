@@ -1,5 +1,7 @@
 "use server";
 
+import { loginUser } from "./LoginAction";
+
 export const registerUser = async (_currentState: any, formData: FormData) => {
   const fullName = formData.get("fullName") as string;
   const email = formData.get("email") as string;
@@ -53,6 +55,9 @@ export const registerUser = async (_currentState: any, formData: FormData) => {
   }
 
   const data = await response.json();
+  if(data.success){
+    return await loginUser(_currentState, formData);
+  }
 
   if (!response.ok) {
     return { success: false, message: data };

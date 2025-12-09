@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useActionState } from "react";
+import React, { useState, useActionState, useEffect } from "react";
 import { Field, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
@@ -23,10 +23,41 @@ import {
   SelectValue,
 } from "../ui/select";
 import { createTravelPlan } from "@/services/travels/createTravelPlan";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const CreateTravelPlanFormDialog = () => {
   const [open, setOpen] = useState(false);
   const [state, formAction, isPending] = useActionState(createTravelPlan, null);
+ const router = useRouter(); // 3. Initialize router
+
+  // 4. Watch for changes in state
+ useEffect(() => {
+    // 1. Handle Successful Submission
+    if (state?.success) {
+      // Show success toast
+      toast.success(`Trip "${state.data?.data.title || 'Untitled'}" created successfully!`);
+      setOpen(false);
+    }
+    
+    // 2. Handle Limit Reached (Redirect & Toast)
+    if (state?.isLimitReached) {
+      // Show error toast for the limit
+      toast.error(state.message || "Plan limit reached. Redirecting to subscription.");
+      setOpen(false);
+      // Give the toast a moment to show, then redirect
+      setTimeout(() => {
+         router.push("/subscribe"); 
+      }, 500); // 500ms delay
+    }
+
+    // 3. Handle Other Errors
+    if (state?.success === false && !state.isLimitReached) {
+        // Show generic error toast
+        toast.error(state.message || "Failed to create travel plan.");
+    }
+    
+  }, [state, router]); 
 
 
   return (

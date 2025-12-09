@@ -17,6 +17,8 @@ import { ModeToggle } from "../ui/modeToggle";
 import { ProfileIcon } from "./profileIcon";
 import { decodeUser } from "@/services/profile/decodeUser";
 import { useEffect, useState } from "react";
+import { LogOut } from "lucide-react";
+import LogoutButton from "../auth/LogOut";
 
 const navigationLinks = [
   { href: "/", label: "Home" },
@@ -32,21 +34,30 @@ export default function Navbar() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-  const fetchUser = async () => {
-    try {
-      const decoded = await decodeUser();
-     // Debug log
-      setUser(decoded);
-    } catch (error) {
-      console.error("Failed to fetch user:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-  fetchUser();
-}, []);
+    const fetchUser = async () => {
+      try {
+        // 1. Call the async function directly. 
+        // We assume decodeUser handles token retrieval (e.g., from cookies/localStorage).
+        const decoded = await decodeUser();
+        
+        // If decoding succeeds, set the user data
+        setUser(decoded);
+      } catch (error) {
+        // 2. IMPORTANT: If token is missing, expired, or invalid, 
+        // the decodeUser service should throw. We catch the error
+        // and safely set the user to null (unauthenticated state).
+        // This is the correct flow for handling unauthenticated users.
+        setUser(null);
+        // console.error("Failed to fetch user, defaulting to guest:", error); 
+      } finally {
+        // 3. Stop loading regardless of success or failure
+        setIsLoading(false);
+      }
+    };
+    fetchUser();
+  }, []); // Run only once on mount
 
-  // Fix: user already contains the full data structure from API
+  // Ensure you access the correct nested properties from the resolved API data
   const username = user?.profile?.fullName;
 
   return (
@@ -139,13 +150,7 @@ export default function Navbar() {
                   <span className="text-sm font-extrabold text-foreground hidden sm:inline">
                     Hi, {username}
                   </span>
-                  <Button 
-                    size="sm" 
-                    variant="ghost"
-                    className="font-extrabold border-2"
-                  >
-                    Logout
-                  </Button>
+                  <LogoutButton />
                 </>
               ) : (
                 // Guest user UI

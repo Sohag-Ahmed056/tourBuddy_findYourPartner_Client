@@ -12,6 +12,11 @@ const updateTravel = async (travelPlanId: string, payload: any) => {
     return { success: false, message: "Unauthorized. Please login." };
   }
 
+  const formatPayload ={
+    ...payload,
+    visibility: payload.visibility === "true",
+  }
+
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/v1/travel/update-travel-plan/${travelPlanId}`,
@@ -24,7 +29,7 @@ const updateTravel = async (travelPlanId: string, payload: any) => {
           Cookie: `accessToken=${accessToken}`,
         },
         credentials: "include",
-        body: JSON.stringify(payload),
+        body: JSON.stringify(formatPayload),
       }
     );
 

@@ -12,7 +12,7 @@ export const getMyProfile = async () => {
         `${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/my-profile`,
         {
             method: "GET",
-            cache: "force-cache",
+            cache: "no-store",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${accessToken}`,

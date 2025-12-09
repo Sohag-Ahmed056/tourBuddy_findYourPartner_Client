@@ -1,5 +1,10 @@
 "use server";
+
+import { cookies } from "next/headers";
+
  export const createTravelPlan = async ( _currentState: any,formData: FormData) => {
+     const cookieStore = await cookies();
+        const accessToken = cookieStore.get("accessToken")?.value || "";
     
      
    const payload = {
@@ -19,6 +24,8 @@
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${accessToken}`,
+            "Cookie": `accessToken=${accessToken}`
         },
         credentials:"include",
         body: JSON.stringify(payload),

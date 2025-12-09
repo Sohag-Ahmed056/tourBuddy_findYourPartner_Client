@@ -3,7 +3,9 @@ import TravelPlansSearch from '@/components/travel/travelSearchFilter'
 import { MapPin } from 'lucide-react'
 import React from 'react'
 
-const TravelPlansPage = () => {
+const TravelPlansPage = async({ searchParams }: any) => {
+  const searchParamsObj =await searchParams || {};
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header Section */}
@@ -24,10 +26,17 @@ const TravelPlansPage = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
-        <TravelPlans />
+
+       <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
+        <TravelPlansSearch />
       </div>
       
+      <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
+       
+        <TravelPlans searchParams={searchParamsObj} />
+      </div>
+
+     
       
     </div>
    

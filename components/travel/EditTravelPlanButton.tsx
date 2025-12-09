@@ -200,8 +200,8 @@ export function EditTravelButton({ plan }: { plan: any }) {
                 <SelectValue placeholder="Select visibility" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="PUBLIC">Public</SelectItem>
-                <SelectItem value="PRIVATE">Private</SelectItem>
+                <SelectItem value="true">Public</SelectItem>
+                <SelectItem value="false">Private</SelectItem>
               </SelectContent>
             </Select>
           </div>
