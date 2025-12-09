@@ -3,10 +3,12 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { Mail, MapPin, Briefcase, Calendar } from "lucide-react";
+import { Mail, MapPin, Briefcase, Calendar, LayoutDashboard } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
+import Link from "next/link";
+import { getDashboard } from "@/proxy";
 
 
 
@@ -28,13 +30,13 @@ import Image from "next/image";
 //     profileImage: profile.profileImage || '',
 
 const ProfileAvatar = ({ profile  }: { profile: any }) => {
-  const firstLetter =  profile?.fullName?.charAt(0).toUpperCase();
+  const firstLetter =  profile?.profile?.fullName?.charAt(0).toUpperCase();
 
   return (
-    <HoverCard openDelay={200} closeDelay={100}>
+     <HoverCard openDelay={200} closeDelay={100}>
       <HoverCardTrigger asChild>
         <button
-          className="h-10 w-10 rounded-full bg-gradient-to-br from-avatar-from to-avatar-to 
+          className="h-10 w-10 rounded-full bg-foreground from-avatar-from to-avatar-to 
             flex items-center justify-center font-semibold text-primary-foreground text-lg
             cursor-pointer transition-all duration-300 ease-out
             hover:scale-110 hover:shadow-lg hover:shadow-primary/20
@@ -58,56 +60,90 @@ const ProfileAvatar = ({ profile  }: { profile: any }) => {
           <div className="-mt-10 mb-4">
             <Avatar className="h-20 w-20 border-4 border-card shadow-lg">
               <AvatarFallback className="bg-gradient-to-br from-avatar-from to-avatar-to text-primary-foreground text-2xl font-bold">
-                <Image
-                src={profile?.profileImage}
-                alt={profile?.fullName}
-                width={100}
-                height={100}
-                className="object-cover"
-              />
+                {profile?.profile?.profileImage ? (
+                  <Image
+                    src={profile.profile.profileImage}
+                    alt={profile.profile.fullName}
+                    width={100}
+                    height={100}
+                    className="object-cover rounded-full"
+                  />
+                ) : (
+                  firstLetter
+                )}
               </AvatarFallback>
             </Avatar>
           </div>
           
-          {/* Name and badge */}
+          {/* Name and location badge */}
           <div className="flex items-start justify-between gap-2 mb-1">
             <h4 className="text-lg font-semibold text-foreground leading-tight">
-              {profile?.fullName}
+              {profile?.profile?.fullName}
             </h4>
-            {profile?.currentLocation && (
+            {profile?.profile?.currentLocation && (
               <Badge variant="secondary" className="text-xs font-medium shrink-0">
-                {profile.currentLocation}
+                {profile.profile.currentLocation}
               </Badge>
             )}
           </div>
           
+          {/* Role badge */}
+          {profile?.role && (
+            <Badge variant="outline" className="text-xs mt-1">
+              {profile.role}
+            </Badge>
+          )}
+          
           {/* Info rows */}
           <div className="space-y-2.5 mt-4">
-            
-            {profile?.bio && (
+            {profile?.profile?.bio && (
               <div className="flex items-center gap-3 text-sm">
                 <Briefcase className="h-4 w-4 text-muted-foreground flex-shrink-0" />
                 <span className="text-foreground/80 truncate">
-                  {profile.bio}
+                  {profile.profile.bio}
                 </span>
               </div>
             )}
 
-            </div>
-            
+            {profile?.email && (
+              <div className="flex items-center gap-3 text-sm">
+                <svg 
+                  className="h-4 w-4 text-muted-foreground flex-shrink-0" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" 
+                  />
+                </svg>
+                <span className="text-foreground/80 truncate">
+                  {profile.email}
+                </span>
+              </div>
+            )}
+          </div>
+          
+          {/* Dashboard Link */}
+          <Link
+            href={getDashboard(profile?.role)}
+            className="mt-4 w-full inline-flex items-center justify-center gap-2 
+              bg-primary text-primary-foreground hover:bg-primary/90
+              px-4 py-2 rounded-md text-sm font-medium
+              transition-colors duration-200
+              focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+          >
+            <LayoutDashboard className="h-4 w-4" />
+            Go to Dashboard
+          </Link>
         </div>
       </HoverCardContent>
     </HoverCard>
   );
 };
 
-
-
-// const ProfileInfoRow = ({ icon: Icon, value }:any ) => (
-//   <div className="flex items-center gap-3 text-sm">
-//     <Icon className="h-4 w-4 text-muted-foreground flex-shrink-0" />
-//     <span className="text-foreground/80 truncate">{value}</span>
-//   </div>
-// );
 
 export default ProfileAvatar;

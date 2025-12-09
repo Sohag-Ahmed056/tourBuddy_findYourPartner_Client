@@ -1,4 +1,5 @@
 import TravelPlans from '@/components/travel/travel'
+import TravelPlansSearch from '@/components/travel/travelSearchFilter'
 import { MapPin } from 'lucide-react'
 import React from 'react'
 

@@ -1,6 +1,7 @@
 import { getMyProfile } from "@/services/profile/myProfile";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import CreateTravelCard from "../travel/createPlanCard";
 
 export default async function DashboardInfo() {
      const{data,success} = await getMyProfile();
@@ -66,6 +67,10 @@ export default async function DashboardInfo() {
           </div>
         </CardContent>
       </Card>
+
+      <div>
+        <CreateTravelCard />
+      </div>
     </div>
   );
 }

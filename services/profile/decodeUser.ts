@@ -4,19 +4,17 @@ import { cookies } from "next/headers";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { getMyProfile } from "./myProfile";
 
-export const decodeUser =async()=>{
-
-        const{data,success} = await getMyProfile();
-        const profile = data?.data?.profile;
-
-   
-    //   const cookieStore = await cookies();
-    //     const accessToken = cookieStore.get("accessToken")?.value || "";
-    //           const decode = jwt.verify(accessToken, "abcd") as JwtPayload;
-               const user = profile;
-
-
-    return user;
-
+export const decodeUser = async () => {
+    const { data, success } = await getMyProfile();
     
+    if (!success || !data?.data) {
+        return null;
+    }
+    
+    // data.data contains the full user object with nested profile
+    const user = data.data;
+    
+    console.log("Decoded user:", user); // Debug log
+    
+    return user;
 }

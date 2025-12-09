@@ -32,22 +32,22 @@ export default function Navbar() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const decoded = await decodeUser();
-        setUser(decoded);
-      } catch (error) {
-        console.error("Failed to fetch user:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchUser();
-  }, []);
+  const fetchUser = async () => {
+    try {
+      const decoded = await decodeUser();
+     // Debug log
+      setUser(decoded);
+    } catch (error) {
+      console.error("Failed to fetch user:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  fetchUser();
+}, []);
 
-
-  // Extract username from email (before @)
-  const username = user?.fullName;
+  // Fix: user already contains the full data structure from API
+  const username = user?.profile?.fullName;
 
   return (
     <header className="border-b px-4 md:px-6">
@@ -136,14 +136,13 @@ export default function Navbar() {
               {user ? (
                 // Authenticated user UI
                 <>
-                  <span className="text-sm  font-extrabold text-foreground hidden sm:inline">
+                  <span className="text-sm font-extrabold text-foreground hidden sm:inline">
                     Hi, {username}
                   </span>
                   <Button 
                     size="sm" 
                     variant="ghost"
                     className="font-extrabold border-2"
-                   
                   >
                     Logout
                   </Button>

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
 // Public routes
-const publicRoutes = ["/login", "/register", "/", "/price", "/travel-plans"];
+const publicRoutes = ["/login", "/register", "/", "/price", "/travel-plans","/user"];
 
 export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;

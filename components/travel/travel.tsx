@@ -35,6 +35,8 @@ export default async function TravelPlans() {
       .toUpperCase();
   };
 
+  if(data.data.length === 0) return <div className="text-center text-shadow-lg text-muted-foreground mt-4">No travel plans found.</div>
+
 
   if (!success) return <div>Error loading travel plans...</div>;
   
@@ -91,18 +93,19 @@ export default async function TravelPlans() {
         </p>
 
         {/* Traveller Info */}
-        <div className="flex items-center gap-3 pt-1 border-t border-border/50">
-          <Avatar className="h-9 w-9 border-2 border-background shadow-sm">
-            <AvatarImage src={plan.tourist.profileImage} alt={plan.tourist.fullName} />
-            <AvatarFallback className="bg-primary text-primary-foreground text-xs font-medium">
-              {getInitials(plan.tourist.fullName)}
-            </AvatarFallback>
-          </Avatar>
-          <div className="min-w-0 flex-1">
-            <p className="text-sm font-medium text-foreground truncate">{plan.tourist.fullName}</p>
-            <p className="text-xs text-muted-foreground truncate">{plan.tourist.currentLocation}</p>
-          </div>
-        </div>
+        <Link href={`/user/${plan.touristId}`} className="flex items-center gap-3 pt-1 border-t border-border/50 cursor-pointer">
+  <Avatar className="h-9 w-9 border-2 border-background shadow-sm">
+    <AvatarImage src={plan.tourist.profileImage} alt={plan.tourist.fullName} />
+    <AvatarFallback className="bg-primary text-primary-foreground text-xs font-medium">
+      {getInitials(plan.tourist.fullName)}
+    </AvatarFallback>
+  </Avatar>
+
+  <div className="min-w-0 flex-1">
+    <p className="text-sm font-medium text-foreground truncate">{plan.tourist.fullName}</p>
+    <p className="text-xs text-muted-foreground truncate">{plan.tourist.currentLocation}</p>
+  </div>
+</Link>
       </CardContent>
 
       {/* Card Footer */}
