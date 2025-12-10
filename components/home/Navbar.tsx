@@ -25,7 +25,7 @@ import NavbarOnboard from "./NavbarOnboard";
 const navigationLinks = [
   { href: "/", label: "Home" },
   { href: "/travel-plans", label: "Travel Plans" },
-  { href: "/price", label: "Pricing" },
+  { href: "/subscribe", label: "Pricing" },
   { href: "/about", label: "About" },
 ];
 
