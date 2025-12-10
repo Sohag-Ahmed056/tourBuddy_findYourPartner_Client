@@ -44,7 +44,7 @@ export default async function getAllTravelPlans(filters?: Record<string, string>
     });
   }
 
-  const url = `http://localhost:5000/api/v1/travel/get-all-travel-plans${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL}/api/v1/travel/get-all-travel-plans${queryParams.toString() ? `?${queryParams.toString()}` : ""}`;
   
   const response = await fetch(url, {
     method: "GET",

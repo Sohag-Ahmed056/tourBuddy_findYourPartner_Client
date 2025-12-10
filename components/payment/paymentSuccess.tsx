@@ -1,10 +1,20 @@
 "use client"
 
 import { Check, Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export function PaymentSuccess() {
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  const handleContinue = () => {
+    router.push("/dashboard");
+  };
+
+  const handleGoHome = () => {
+    router.push("/");
+  };
 
   useEffect(() => {
     // Simulate checking payment status
@@ -59,17 +69,12 @@ export function PaymentSuccess() {
 
         {/* Actions */}
         <button
-          onClick={() => window.location.href = '/'}
+          onClick={handleContinue}
           className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-4 px-6 rounded-xl font-semibold transition-all mb-3"
         >
           Start Creating
         </button>
-        <button
-          onClick={() => window.location.href = '/account'}
-          className="w-full text-gray-600 hover:text-gray-900 py-2 transition-colors"
-        >
-          View Account Details
-        </button>
+        
       </div>
     </div>
   );

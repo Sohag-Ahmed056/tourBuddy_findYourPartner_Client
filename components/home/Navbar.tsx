@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 
 import LogoutButton from "../auth/LogOut";
 import Image from "next/image";
+import NavbarOnboard from "./NavbarOnboard";
 
 const navigationLinks = [
   { href: "/", label: "Home" },
@@ -129,7 +130,7 @@ export default function Navbar() {
             </a>
 
             <NavigationMenu className="max-md:hidden">
-              <NavigationMenuList className="gap-2">
+              <NavigationMenuList  id="nav-links" className="gap-2">
                 {navigationLinks.map((link) => (
                   <NavigationMenuItem key={link.href}>
                     <NavigationMenuLink
@@ -164,10 +165,10 @@ export default function Navbar() {
               ) : (
                 // Guest user UI
                 <>
-                  <Button asChild size="sm" variant="ghost">
+                  <Button asChild size="sm"  id="login-button" variant="ghost">
                     <a href="/login">Sign In</a>
                   </Button>
-                  <Button asChild size="sm">
+                  <Button asChild size="sm"  id="register-button">
                     <a href="/register">Get Started</a>
                   </Button>
                 </>
@@ -178,6 +179,7 @@ export default function Navbar() {
           {user && <ProfileIcon profile={user} />}
         </div>
       </div>
+      <NavbarOnboard />
     </header>
   );
 }

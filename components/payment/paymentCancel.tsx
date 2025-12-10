@@ -1,8 +1,18 @@
 "use client";
 
 import { AlertCircle } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export function PaymentCancel() {
+  const router = useRouter();
+
+  const handleGoHome = () => {
+    router.push("/");
+  }
+  const handleTryAgain = () => {
+    router.push("/subscribe");
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-50 flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-2xl p-8 text-center">
@@ -21,13 +31,13 @@ export function PaymentCancel() {
 
         {/* Actions */}
         <button
-          onClick={() => window.location.href = '/subscribe'}
+          onClick={handleTryAgain}
           className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-4 px-6 rounded-xl font-semibold transition-all mb-3"
         >
           Try Again
         </button>
         <button
-          onClick={() => window.location.href = '/'}
+          onClick={handleGoHome}
           className="w-full text-gray-600 hover:text-gray-900 py-2 transition-colors"
         >
           Back to Home

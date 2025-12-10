@@ -21,8 +21,8 @@ export const loginUser = async (_currentState: any, formData: FormData) => {
   });
 
   if (!response.ok) {
-    const errorData = await response.json();
-    return { success: false, message: errorData };
+    ;
+    return { success: false, message: { message: 'Login failed' } };
   }
 
   const data = await response.json();

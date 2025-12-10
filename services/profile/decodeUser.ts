@@ -14,7 +14,7 @@ export const decodeUser = async () => {
     // data.data contains the full user object with nested profile
     const user = data.data;
     
-    console.log("Decoded user:", user); // Debug log
+
     
     return user;
 }

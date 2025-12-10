@@ -214,21 +214,13 @@ const CreateTravelPlanFormDialog = () => {
                         🧳 Solo Adventure
                       </span>
                     </SelectItem>
-                    <SelectItem value="GROUP">
-                      <span className="flex items-center gap-2">
-                        👥 Group Trip
-                      </span>
-                    </SelectItem>
+                    
                     <SelectItem value="FAMILY">
                       <span className="flex items-center gap-2">
                         👨‍👩‍👧‍👦 Family Vacation
                       </span>
                     </SelectItem>
-                    <SelectItem value="FRIENDS">
-                      <span className="flex items-center gap-2">
-                        🎉 Friends Getaway
-                      </span>
-                    </SelectItem>
+                    
                   </SelectContent>
                 </Select>
               </Field>
