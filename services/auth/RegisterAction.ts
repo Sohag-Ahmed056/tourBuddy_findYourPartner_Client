@@ -59,9 +59,17 @@ export const registerUser = async (_currentState: any, formData: FormData) => {
     return await loginUser(_currentState, formData);
   }
 
-  if (!response.ok) {
-    return { success: false, message: data };
+    if (!response.ok) {
+    return { 
+      success: false, 
+      message: data.message || "Registration failed", 
+      data: null 
+    };
   }
 
-  return { success: true, data };
+  return { 
+    success: true, 
+    message: null, 
+    data 
+  };
 };

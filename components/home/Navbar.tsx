@@ -17,8 +17,9 @@ import { ModeToggle } from "../ui/modeToggle";
 import { ProfileIcon } from "./profileIcon";
 import { decodeUser } from "@/services/profile/decodeUser";
 import { useEffect, useState } from "react";
-import { LogOut } from "lucide-react";
+
 import LogoutButton from "../auth/LogOut";
+import Image from "next/image";
 
 const navigationLinks = [
   { href: "/", label: "Home" },
@@ -116,6 +117,14 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="flex items-center gap-6">
             <a href="/" className="text-primary hover:text-primary/90">
+            <Image
+              src="/Logo.png"
+              alt="Logo"
+              width={70}
+              height={50}
+              className="mr-2"
+            />
+         
               <span className="sr-only">Home</span>
             </a>
 

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export function Footer() {
   return (
     <footer className="w-full border-t border-zinc-800/40 bg-zinc-50 dark:bg-black py-12 mt-16">
@@ -9,7 +11,13 @@ export function Footer() {
           {/* Brand */}
           <div>
             <h2 className="text-2xl font-bold text-zinc-900 dark:text-white mb-3">
-              TravelMate
+              <Image
+                            src="/Logo.png"
+                            alt="Logo"
+                            width={70}
+                            height={50}
+                            className="mr-2"
+                          />
             </h2>
             <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
               Discover destinations, create travel plans, and connect with 
@@ -36,8 +44,8 @@ export function Footer() {
               Contact
             </h3>
             <ul className="space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
-              <li>Email: support@travelmate.com</li>
-              <li>Phone: +880 123 456 789</li>
+              <li>Email: sohagahmed056@gmail.com</li>
+              <li>Phone: +880 1302243428</li>
               <li>Address: Dhaka, Bangladesh</li>
             </ul>
           </div>
@@ -50,14 +58,7 @@ export function Footer() {
             © {new Date().getFullYear()} TravelMate. All rights reserved.
           </p>
 
-          <div className="flex gap-4">
-            <a href="#" className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white text-sm">
-              Privacy Policy
-            </a>
-            <a href="#" className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white text-sm">
-              Terms of Service
-            </a>
-          </div>
+          
         </div>
 
       </div>

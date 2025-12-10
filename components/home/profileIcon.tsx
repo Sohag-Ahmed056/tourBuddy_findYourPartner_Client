@@ -1,7 +1,7 @@
 
+"use client";
 
 
-import { getMyProfile } from "@/services/profile/myProfile";
 import ProfileAvatar from "../ui/profileAvatar";
 
 
@@ -16,7 +16,7 @@ import ProfileAvatar from "../ui/profileAvatar";
  
 
 export const ProfileIcon = ({ profile }: { profile: any }) => {
-  // Early return if no profile data
+ 
   if (!profile) {
     return null;
   }

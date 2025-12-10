@@ -31,14 +31,41 @@ import { cookies } from "next/headers";
         body: JSON.stringify(payload),
     });
 
+    const data = await res.json();
+
     if (!res.ok) {
-        const errorData = await res.json();
-        return { success: false, message: errorData };
+      // 👇 CHECK FOR THE SPECIFIC LIMIT ERROR HERE
+      if (data?.message?.includes("Free users can create only 3")) {
+         return { 
+           success: false, 
+           message: data.message, 
+           isLimitReached: true // 🚩 Set this flag
+         };
+      }
+
+      return { success: false, message: data.message || "Something went wrong" };
     }
-    return { success: true, data: await res.json() };
+
+    return { success: true, data };
+  } 
 
 
 
-}
+
+
+
+
+
+
+
+    // if (!res.ok) {
+    //     const errorData = await res.json();
+    //     return { success: false, message: errorData };
+    // }
+    // return { success: true, data: await res.json() };
+
+
+
+
 
 

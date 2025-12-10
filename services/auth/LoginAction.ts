@@ -51,7 +51,7 @@ export const loginUser = async (_currentState: any, formData: FormData) => {
   // Decode token to get user role
   let userRole: string | null = null;
   try {
-    const decode = jwt.verify(accessToken, "abcd") as JwtPayload;
+      const decode = jwt.verify(accessToken, "abcd") as JwtPayload;
     userRole = decode.role as string;
   } catch (error) {
     console.error("Failed to decode token:", error);

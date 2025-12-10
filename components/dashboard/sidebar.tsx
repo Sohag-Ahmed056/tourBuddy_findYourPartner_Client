@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { Home, MapPin, Inbox, Send, User, Settings, LogOut, X, Menu } from "lucide-react";
 import Link from "next/link";
+import LogoutButton from "../auth/LogOut";
+import Image from "next/image";
 
 export default function Sidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -13,7 +15,7 @@ export default function Sidebar() {
     { id: "join-requests-received", icon: Inbox, label: "Join Requests", href: "/dashboard/receivedJoinrequest" },
     { id: "join-requests-sent", icon: Send, label: "Sent Requests", href: "/dashboard/sendJoinrequest" },
     { id: "profile", icon: User, label: "Profile", href: "/dashboard/myProfile" },
-    { id: "settings", icon: Settings, label: "Settings", href: "/settings" },
+    { id: "settings", icon: Settings, label: "Settings", href: "/dashboard/settings" },
   ];
 
   return (
@@ -23,7 +25,13 @@ export default function Sidebar() {
         <button onClick={() => setSidebarOpen(true)}>
           <Menu size={26} />
         </button>
-        <h1 className="text-xl font-semibold ml-4">TravelApp</h1>
+         <Image
+                      src="/Logo.png"
+                      alt="Logo"
+                      width={40}
+                      height={20}
+                      className="mr-2"
+                    />
       </div>
 
       {/* Overlay for mobile */}
@@ -43,7 +51,13 @@ export default function Sidebar() {
       >
         {/* Header */}
         <div className="p-4 flex justify-between items-center border-b">
-          <h1 className="font-bold text-xl">TravelApp</h1>
+          <Image
+                       src="/Logo.png"
+                       alt="Logo"
+                       width={70}
+                       height={30}
+                       className="mr-2"
+                     />
           <button onClick={() => setSidebarOpen(false)} className="lg:hidden">
             <X />
           </button>
@@ -68,10 +82,9 @@ export default function Sidebar() {
 
         {/* Logout */}
         <div className="p-4 border-t">
-          <button className="flex items-center gap-3 text-red-600 hover:bg-red-50 px-4 py-2 rounded-lg">
-            <LogOut size={20} />
-            Logout
-          </button>
+          
+            <LogoutButton />
+          
         </div>
       </aside>
     </>
