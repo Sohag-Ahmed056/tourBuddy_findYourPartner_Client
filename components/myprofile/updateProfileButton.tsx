@@ -38,41 +38,46 @@ export function UpdateProfileButton({ profile }: { profile: any }) {
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    try {
-      // Convert interests string to array
-      const interestsArray = formData.interests
-        .split(',')
-        .map((interest: any) => interest.trim())
-        .filter((interest: any) => interest.length > 0)
+  try {
+    const interestsArray = formData.interests
+      .split(',')
+      .map((i: string) => i.trim())
+      .filter((i: string) => i.length > 0);
 
-      const payload = {
-        fullName: formData.fullName,
-        bio: formData.bio,
-        currentLocation: formData.currentLocation,
-        visitedCountries: Number(formData.visitedCountries),
-        interests: interestsArray,
-        ...(formData.profileImage && { profileImage: formData.profileImage }),
-      }
+    const visitedCountriesArray = formData.visitedCountries
+      .split(',')
+      .map((c: string) => c.trim())
+      .filter((c: string) => c.length > 0);
 
-      const result = await updateUser(payload)
+    const payload = {
+      fullName: formData.fullName,
+      bio: formData.bio,
+      currentLocation: formData.currentLocation,
+      visitedCountries: visitedCountriesArray,
+      interests: interestsArray,
+      ...(formData.profileImage && { profileImage: formData.profileImage }),
+    };
 
-      if (result.success) {
-        toast.success('Profile updated successfully!')
-        setOpen(false)
-        router.refresh()
-      } else {
-        toast.error(result.message || 'Failed to update profile')
-      }
-    } catch (error) {
-      toast.error('An error occurred while updating')
-      console.error('Update error:', error)
-    } finally {
-      setIsSubmitting(false)
+    const result = await updateUser(payload);
+
+    if (result.success) {
+      toast.success('Profile updated successfully!');
+      setOpen(false);
+      router.refresh();
+    } else {
+      toast.error(result.message || 'Failed to update profile');
     }
+  } catch (error) {
+    toast.error('An error occurred while updating');
+    console.error('Update error:', error);
+  } finally {
+    setIsSubmitting(false);
   }
+};
+
 
   const handleChange = (field: string, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }))
