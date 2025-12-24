@@ -47,7 +47,7 @@ export default function JoinDialog({ id }: { id: string }) {
         {state && state.success ? (
         <Button className="rounded-xl px-6" disabled>Request Sent</Button>
         ) : (
-          <Button className="rounded-xl px-6">Join</Button>
+          <Button className=" w-full rounded-xl px-6">Join</Button>
         )}
       </DialogTrigger>
 
