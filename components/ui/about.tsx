@@ -1,216 +1,167 @@
-import { Globe, Shield, Heart, Users, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import heroImage from "@/public/heroTravel.jpg";
-import travelersImage from "@/public/Travelers.jpg";
-import coastalImage from "@/public/CoastalTravel.jpg";
-import Image from "next/image";
+"use client";
 
-const values = [
+import { Target, Lightbulb, ShieldAlert, HeartHandshake, Globe2, Sparkles, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
+
+const motive = {
+  title: "Our Motive",
+  subtitle: "Why We Exist",
+  description: "TravelBuddy was born from a simple observation: the world is vast, but solo travel can often feel small and isolating. Our motive is to democratize global exploration by removing the fear of being alone. We believe that by connecting like-minded people, we don't just facilitate trips—we build a global support system for curiosity.",
+};
+
+const objectives = [
   {
-    icon: Globe,
-    title: "Explore Fearlessly",
-    description:
-      "Every destination is an opportunity. We encourage stepping outside comfort zones and embracing the unknown.",
-    gradient: "bg-gradient-warm",
+    title: "Safety & Verification",
+    desc: "To provide a secure environment where every traveler is verified, ensuring peace of mind before the first flight is booked.",
+    icon: ShieldAlert
   },
   {
-    icon: Shield,
-    title: "Safety First",
-    description:
-      "Verified profiles, community reviews, and 24/7 support ensure every journey is secure and worry-free.",
-    gradient: "bg-gradient-ocean",
+    title: "Meaningful Connection",
+    desc: "To move beyond 'roommate finding' and create matches based on shared values, interests, and travel styles.",
+    icon: HeartHandshake
   },
   {
-    icon: Heart,
-    title: "Authentic Connections",
-    description:
-      "We match travelers based on interests, travel style, and personality—not just destinations.",
-    gradient: "bg-gradient-sunset",
-  },
-  {
-    icon: Users,
-    title: "Community Spirit",
-    description:
-      "Our global community shares tips, stories, and support to make every trip unforgettable.",
-    gradient: "bg-gradient-warm",
-  },
+    title: "Global Accessibility",
+    desc: "To make travel accessible for those who have the means and the heart to explore but lack a companion to share the journey.",
+    icon: Globe2
+  }
 ];
 
-const stats = [
-  { number: "50K+", label: "Active Travelers" },
-  { number: "120", label: "Countries Covered" },
-  { number: "200K+", label: "Trips Matched" },
-  { number: "98%", label: "Happy Adventurers" },
+const challenges = [
+  {
+    item: "Building Trust in a Digital Age",
+    detail: "Creating a vetting system that is rigorous enough to ensure safety but seamless enough to encourage community growth."
+  },
+  {
+    item: "Cultural Nuances",
+    detail: "Bridging the gap between different social norms and expectations when pairing travelers from diverse backgrounds."
+  },
+  {
+    item: "Real-time Reliability",
+    detail: "Managing the logistics of travel plans that are constantly changing due to flights, weather, or personal shifts."
+  }
 ];
 
 const About = () => {
   return (
-    <main>
-      {/* Hero Section */}
-      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroImage.src})` }}
-        >
-          <div className="absolute inset-0 bg-foreground/50" />
-        </div>
-
-        <div className="relative z-10 container mx-auto px-6 text-center">
-          
-
-          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground mb-6 leading-tight">
-            Adventures Are Better
-            <br />
-            <span className="text-gradient-warm">Together</span>
-          </h1>
-
-          <p className="font-body text-lg md:text-xl text-primary-foreground/90 max-w-2xl mx-auto">
-            We connect wanderers, dreamers, and explorers from around the world
-            to share unforgettable journeys and create lifelong friendships.
-          </p>
-        </div>
-
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
-      </section>
-
-      {/* Story Section */}
-      <section className="py-20 md:py-32 bg-background">
+    <main className="min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 selection:bg-indigo-100">
+      
+      {/* 1. Header: Minimalist and Bold */}
+      <section className="py-20 border-b border-zinc-100 dark:border-zinc-900">
         <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div className="relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-elevated">
-                <Image
-                  src={travelersImage}
-                  alt="Group of happy travelers exploring together"
-                  className="w-full h-auto object-cover aspect-square"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 to-transparent" />
-              </div>
-
-              <div className="absolute -bottom-6 -right-6 md:-right-10 bg-card p-6 rounded-xl shadow-warm">
-                <p className="text-4xl font-display font-bold text-primary">
-                  50K+
-                </p>
-                <p className="text-muted-foreground font-body">Travel Buddies</p>
-              </div>
-            </div>
-
-            <div>
-              <span className="text-primary font-medium font-body text-sm uppercase tracking-wider">
-                Our Story
-              </span>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-3 mb-6">
-                Born from a Solo Journey,
-                <br />
-                <span className="text-primary">Built for Connection</span>
-              </h2>
-
-              <div className="space-y-4 text-muted-foreground font-body leading-relaxed">
-                <p>
-                  In 2019, our founder sat alone at a cafe in Barcelona, watching
-                  groups of friends laughing over tapas. That moment of loneliness
-                  sparked an idea: what if solo travelers could easily find
-                  companions who shared their wanderlust?
-                </p>
-                <p>
-                  Today, TravelBuddy has connected over 50,000 adventurers across
-                  120 countries. We've turned strangers into hiking partners, city
-                  explorers into lifelong friends, and solo trips into group
-                  adventures.
-                </p>
-                <p>
-                  Because the best travel stories aren't about the places you
-                  visit—they're about the people you meet along the way.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Values Section */}
-      <section className="py-20 md:py-32 bg-secondary/50">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-primary font-medium font-body text-sm uppercase tracking-wider">
-              What We Believe
-            </span>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-3">
-              Our Core Values
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((value) => (
-              <div key={value.title} className="group">
-                <div className="bg-card rounded-2xl p-8 h-full shadow-soft hover:shadow-elevated transition-shadow duration-300">
-                  <div
-                    className={`w-14 h-14 rounded-xl ${value.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
-                  >
-                    <value.icon className="w-7 h-7 text-primary-foreground" />
-                  </div>
-                  <h3 className="font-display text-xl font-semibold text-foreground mb-3">
-                    {value.title}
-                  </h3>
-                  <p className="font-body text-muted-foreground leading-relaxed">
-                    {value.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-20 bg-gradient-warm">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <p className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-2">
-                  {stat.number}
-                </p>
-                <p className="font-body text-primary-foreground/80 text-sm md:text-base">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 md:py-32 bg-background relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-1/2 h-full opacity-10">
-          <div
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${coastalImage.src})` }}
-          />
-        </div>
-
-        <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-3xl">
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-              Ready to Find Your
-              <br />
-              <span className="text-gradient-warm">Travel Buddy?</span>
-            </h2>
-            <p className="font-body text-lg text-muted-foreground mb-8 max-w-xl">
-              Join our community of adventurers and never travel alone again.
-              Your next great adventure—and friendship—is just a click away.
+            <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-bold tracking-widest text-xs uppercase mb-4">
+              <Sparkles className="w-4 h-4" /> About TravelBuddy
+            </div>
+            <h1 className="text-5xl md:text-6xl font-black tracking-tight mb-6">
+              Making the world feel <br /> 
+              <span className="text-zinc-400 dark:text-zinc-600">a little bit smaller.</span>
+            </h1>
+            <p className="text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              We are a community-driven platform dedicated to the idea that no one should 
+              miss out on the beauty of the world simply because they don't have a partner to go with.
             </p>
+          </div>
+        </div>
+      </section>
 
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="font-body group">
-                Start Your Journey
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button variant="outline" size="lg" className="font-body">
-                Browse Destinations
-              </Button>
+      {/* 2. The Motive & Objectives */}
+      <section className="py-20">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-12 gap-16">
+            
+            {/* Left: Motive */}
+            <div className="lg:col-span-5 space-y-6">
+              <h2 className="text-sm font-bold uppercase tracking-widest text-indigo-500">{motive.subtitle}</h2>
+              <h3 className="text-3xl font-bold">{motive.title}</h3>
+              <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">
+                {motive.description}
+              </p>
+              <div className="p-6 bg-zinc-50 dark:bg-zinc-900 rounded-2xl border border-zinc-100 dark:border-zinc-800">
+                <p className="font-medium italic text-zinc-700 dark:text-zinc-300">
+                  "Our goal isn't just to help you find a traveler; it's to help you find your community in every corner of the globe."
+                </p>
+              </div>
+            </div>
+
+            {/* Right: Objectives */}
+            <div className="lg:col-span-7">
+              <div className="grid gap-8">
+                {objectives.map((obj, i) => (
+                  <div key={i} className="flex gap-6 group">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-900/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 transition-colors">
+                      <obj.icon className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-bold mb-2">{obj.title}</h4>
+                      <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                        {obj.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Challenges Section */}
+      <section className="py-20 bg-zinc-50 dark:bg-zinc-900/50">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold mb-4">The Challenges We Face</h2>
+              <p className="text-zinc-500">Connecting strangers across borders isn't easy, but it's worth it.</p>
+            </div>
+            
+            <div className="grid gap-6">
+              {challenges.map((c, i) => (
+                <div key={i} className="bg-white dark:bg-zinc-900 p-8 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="space-y-1">
+                    <h4 className="text-lg font-bold text-indigo-600 dark:text-indigo-400">{c.item}</h4>
+                    <p className="text-zinc-600 dark:text-zinc-400 text-sm max-w-xl">{c.detail}</p>
+                  </div>
+                  <div className="text-xs font-black text-zinc-300 dark:text-zinc-700 uppercase">Challenge 0{i+1}</div>
+                </div>
+              ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* 4. Community/Help Section */}
+      <section className="py-24">
+        <div className="container mx-auto px-6 text-center max-w-3xl">
+          <div className="inline-block p-3 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 mb-6">
+            <Lightbulb className="w-6 h-6" />
+          </div>
+          <h2 className="text-4xl font-bold mb-8">How People Have Helped</h2>
+          <div className="grid gap-6 text-left">
+            <div className="space-y-4">
+              <div className="flex gap-4 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800">
+                <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0" />
+                <p className="text-zinc-600 dark:text-zinc-400"><strong className="text-zinc-900 dark:text-white">Community Feedback:</strong> Our first 1,000 users helped us refine our verification process by suggesting ID-check tiers.</p>
+              </div>
+              <div className="flex gap-4 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800">
+                <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0" />
+                <p className="text-zinc-600 dark:text-zinc-400"><strong className="text-zinc-900 dark:text-white">Local Guides:</strong> Seasoned travelers have volunteered their time to write safety guides for over 50 major cities.</p>
+              </div>
+              <div className="flex gap-4 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800">
+                <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0" />
+                <p className="text-zinc-600 dark:text-zinc-400"><strong className="text-zinc-900 dark:text-white">Open Beta Testers:</strong> Hundreds of developers and travelers helped us iron out the real-time matching algorithm we use today.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Minimalist CTA */}
+      <section className="py-20 border-t border-zinc-100 dark:border-zinc-900">
+        <div className="container mx-auto px-6 text-center">
+          <h2 className="text-2xl font-bold mb-6">Want to contribute to our mission?</h2>
+          <Link href="/register" className="btn btn-primary bg-blue-900 rounded border-2 p-4">Get Started</Link>
         </div>
       </section>
     </main>

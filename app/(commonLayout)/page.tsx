@@ -1,45 +1,58 @@
+// REMOVE "use client" from here
 import WhyChooseUs from "@/components/home/Choose";
+import FAQ from "@/components/home/FAQ";
 import { Footer } from "@/components/home/Footer";
-import TravelHero from "@/components/home/Hero";
+import HeroSection from "@/components/home/HeroSection"; // Import the wrapper
+import Newsletter from "@/components/home/NewsLetter";
 import Testimonials from "@/components/home/testimonial";
-
-import CreateTravelPlanFormDialog from "@/components/travel/createTravelPlanFormDialog";
+import HowItWorks from "@/components/home/UsesGuide";
 import TravelPlans from "@/components/travel/travel";
-import TravelSearchFilter from "@/components/travel/travelSearchFilter";
-import { Button } from "@/components/ui/button";
-import { ModeToggle } from "@/components/ui/modeToggle";
-import Image from "next/image";
+import HelpAndContact from "@/components/ui/help";
+import HelpHub from "@/components/ui/help";
+import HelpCenter from "@/components/ui/help";
 
 export default function Home() {
   return (
-     <div className="min-h-screen w-full bg-zinc-50 dark:bg-black flex flex-col items-center justify-start font-sans">
+    <div className="min-h-screen w-full bg-zinc-50 dark:bg-black flex flex-col items-center justify-start font-sans">
+      
+      {/* Combined Hero and AI Suggestion */}
+      <HeroSection />
 
-      {/* Centered Hero Section */}
-      <div className="w-full flex justify-center">
-        <TravelHero />
+      {/* 3. Travel Plans Section */}
+      <div className="max-w-7xl mx-auto px-6 py-12 md:py-20 w-full">
+        <div className="flex flex-col items-center mb-10 text-center">
+           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground tracking-tight">
+             Adventure is Calling
+           </h2>
+           <p className="text-muted-foreground mt-2 max-w-lg">
+             Explore all current community travel plans and join the next journey.
+           </p>
+        </div>
+        <TravelPlans />
       </div>
 
-      {/* Centered Travel Plans */}
-         
-       <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
-            <h1 className=" mb-8 font-display text-3xl md:text-4xl text text-center font-bold text-foreground tracking-tight">
-              All Travel Plans
-            </h1>
-              <TravelPlans />
-            </div>
-         
-            <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
-              <WhyChooseUs />
-            </div>
+      {/* 4. Other Sections */}
+      <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 w-full">
+        <WhyChooseUs />
+      </div>
 
-            <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
-              <Testimonials />
+      <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 w-full">
+        <Testimonials />
+      </div>
+      <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 w-full">
+        <HowItWorks />
+      </div>
+      <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 w-full">
+        <FAQ />
+      </div>
+      <div >
+        <Newsletter />
+      </div>
 
-            </div>
-      <div className="w-full flex flex-col items-center justify-center mt-12 mb-12">
+      
+      <div className="max-w-7xl mx-auto px-6 py-12 md:py-16 w-full">
         <Footer />
       </div>
-
     </div>
   );
 }

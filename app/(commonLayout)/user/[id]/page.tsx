@@ -17,7 +17,7 @@ const UserInformationPage = async ({params} :{params:any} ) => {
     }
 
   return (
-    <div>
+    <div className='mt-5 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full'>
         <UserProfileComponent userData={UserData} />
     </div>
   )

@@ -1,17 +1,17 @@
 "use client";
 
 import { createPaymentSession } from "@/services/payment/createPayment";
-import { AlertCircle, Check, CreditCard, Loader2 } from "lucide-react";
+import { AlertCircle, Check, CreditCard, Loader2, Sparkles } from "lucide-react";
 import { useActionState, useEffect } from "react";
 
 function SubscriptionPlans() {
   const [state, formAction, isPending] = useActionState(createPaymentSession, null);
-useEffect(() => {
-  if (state?.success && state?.url) {
-    window.open(state.url, "_blank"); // <-- opens Stripe in new tab
-  }
-}, [state]);
 
+  useEffect(() => {
+    if (state?.success && state?.url) {
+      window.open(state.url, "_blank");
+    }
+  }, [state]);
 
   const plans = [
     {
@@ -19,7 +19,7 @@ useEffect(() => {
       planType: 'MONTHLY',
       price: 28,
       duration: '/month',
-      savings:10,
+      savings: 'Save 10% on annual billing',
       features: [
         'Unlimited travel plans',
         'AI-powered recommendations',
@@ -27,87 +27,90 @@ useEffect(() => {
         'Export itineraries',
         'Collaborative planning'
       ],
-      popular: false
+      popular: true // Set to true to show the dark/light mode gradient effect
     }
-    
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-12 px-4">
-      <div className="max-w-6xl mx-auto">
-
-        {/* Header */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
-            <AlertCircle className="w-4 h-4" />
-            You've reached your plan limit
-          </div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Upgrade Your Plan
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Continue creating amazing travel experiences with unlimited access
-          </p>
+    // Standardized container alignment
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+      
+      {/* Header - Uses foreground colors for automatic light/dark swapping */}
+      <div className="text-center mb-16">
+        <div className="inline-flex items-center gap-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-6">
+          <AlertCircle className="w-4 h-4" />
+          You&apos;ve reached your plan limit
         </div>
+        <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">
+          Upgrade Your Experience
+        </h1>
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          Unlock the full potential of AI travel planning with our premium features.
+        </p>
+      </div>
 
-        {/* Error/Success Message */}
-        {state && !state.success && (
-          <div className="max-w-2xl mx-auto mb-6 bg-red-50 border border-red-200 rounded-lg p-4 flex items-center gap-3">
-            <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
-            <p className="text-red-800">{state.message}</p>
-          </div>
-        )}
+      {/* Error Message */}
+      {state && !state.success && (
+        <div className="max-w-2xl mx-auto mb-8 bg-destructive/10 border border-destructive/20 rounded-xl p-4 flex items-center gap-3">
+          <AlertCircle className="w-5 h-5 text-destructive flex-shrink-0" />
+          <p className="text-destructive-foreground text-sm font-medium">{state.message}</p>
+        </div>
+      )}
 
-        {/* Plans Grid */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      {/* Plans Grid - Centered within the container */}
+      <div className="flex justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-8 w-full max-w-xl">
           {plans.map((plan) => (
             <div
               key={plan.planType}
-              className={`relative bg-white rounded-2xl shadow-lg border-2 transition-all ${
+              className={`relative group bg-card text-card-foreground rounded-3xl shadow-xl border-2 transition-all duration-300 ${
                 plan.popular
-                  ? 'border-blue-500 shadow-blue-100'
-                  : 'border-gray-200 hover:border-blue-300'
+                  ? 'border-primary shadow-primary/10'
+                  : 'border-border hover:border-primary/50'
               }`}
             >
               {/* Popular Badge */}
               {plan.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                    Most Popular
+                  <span className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">
+                    Recommended
                   </span>
                 </div>
               )}
 
-              <div className="p-8">
+              <div className="p-8 md:p-10">
                 {/* Plan Header */}
-                <div className="mb-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                    {plan.name}
-                  </h3>
+                <div className="mb-8">
+                  <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-2xl font-bold">{plan.name}</h3>
+                    <Sparkles className="w-6 h-6 text-primary opacity-50" />
+                  </div>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-5xl font-bold text-gray-900">
+                    <span className="text-5xl font-extrabold tracking-tight">
                       ${plan.price}
                     </span>
-                    <span className="text-gray-600">{plan.duration}</span>
+                    <span className="text-muted-foreground font-medium">{plan.duration}</span>
                   </div>
                   {plan.savings && (
-                    <p className="text-green-600 font-medium mt-2">
+                    <p className="text-emerald-600 dark:text-emerald-400 text-sm font-semibold mt-3 bg-emerald-50 dark:bg-emerald-950/30 w-fit px-3 py-1 rounded-lg">
                       {plan.savings}
                     </p>
                   )}
                 </div>
 
-                {/* Features */}
-                <ul className="space-y-4 mb-8">
+                {/* Features List */}
+                <ul className="space-y-4 mb-10">
                   {plan.features.map((feature, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">{feature}</span>
+                      <div className="mt-1 bg-primary/10 rounded-full p-1">
+                         <Check className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                      </div>
+                      <span className="text-muted-foreground">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
-                {/* Hidden Form */}
+                {/* Subscription Form */}
                 <form action={formAction}>
                   <input type="hidden" name="planType" value={plan.planType} />
                   <input type="hidden" name="price" value={plan.price} />
@@ -115,31 +118,33 @@ useEffect(() => {
                   <button
                     type="submit"
                     disabled={isPending}
-                    className={`w-full py-4 px-6 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${
+                    className={`w-full py-4 px-6 rounded-2xl font-bold transition-all flex items-center justify-center gap-3 ${
                       plan.popular
-                        ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl'
-                        : 'bg-gray-900 hover:bg-gray-800 text-white'
-                    } disabled:opacity-50 disabled:cursor-not-allowed`}
+                        ? 'bg-primary text-primary-foreground hover:opacity-90 shadow-lg shadow-primary/20'
+                        : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                    } disabled:opacity-50 disabled:cursor-not-allowed transform active:scale-[0.98]`}
                   >
                     {isPending ? (
                       <>
                         <Loader2 className="w-5 h-5 animate-spin" />
-                        Processing...
+                        Validating Session...
                       </>
                     ) : (
                       <>
                         <CreditCard className="w-5 h-5" />
-                        Subscribe Now
+                        Upgrade Now
                       </>
                     )}
                   </button>
                 </form>
 
+                <p className="text-center text-xs text-muted-foreground mt-6">
+                  Secure payment via Stripe. Cancel anytime.
+                </p>
               </div>
             </div>
           ))}
         </div>
-
       </div>
     </div>
   );

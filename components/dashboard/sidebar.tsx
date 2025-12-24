@@ -11,9 +11,11 @@ export default function Sidebar() {
 
   const menuItems = [
     { id: "dashboard", icon: Home, label: "Home", href: "/" },
+    {id: "analytics", icon: MapPin, label: "Analytics", href: "/dashboard/analytics" },
     { id: "travel-plans", icon: MapPin, label: "Travel Plans", href: "/dashboard/getMytravelplans" },
     { id: "join-requests-received", icon: Inbox, label: "Join Requests", href: "/dashboard/receivedJoinrequest" },
     { id: "join-requests-sent", icon: Send, label: "Sent Requests", href: "/dashboard/sendJoinrequest" },
+    { id: "chats", icon: Inbox, label: "Messaging", href: "/chat" },
     { id: "profile", icon: User, label: "Profile", href: "/dashboard/myProfile" },
     { id: "settings", icon: Settings, label: "Settings", href: "/dashboard/settings" },
   ];
@@ -25,13 +27,7 @@ export default function Sidebar() {
         <button onClick={() => setSidebarOpen(true)}>
           <Menu size={26} />
         </button>
-         <Image
-                      src="/Logo.png"
-                      alt="Logo"
-                      width={40}
-                      height={20}
-                      className="mr-2"
-                    />
+         <h1 className="text-xl font-semibold ml-4">Travel Express</h1>
       </div>
 
       {/* Overlay for mobile */}
@@ -51,13 +47,7 @@ export default function Sidebar() {
       >
         {/* Header */}
         <div className="p-4 flex justify-between items-center border-b">
-          <Image
-                       src="/Logo.png"
-                       alt="Logo"
-                       width={70}
-                       height={30}
-                       className="mr-2"
-                     />
+         <h1 className="text-xl font-semibold ml-4">Travel Express</h1>
           <button onClick={() => setSidebarOpen(false)} className="lg:hidden">
             <X />
           </button>

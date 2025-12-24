@@ -5,6 +5,7 @@ import { Badge } from '../ui/badge'
 import { DeleteTravelButton } from '../travel/DeleteTravelButton'
 import { EditTravelButton } from '../travel/EditTravelPlanButton'
 import { Calendar, MapPin, Plane, Wallet } from 'lucide-react'
+import CreateTravelPlanFormDialog from '../travel/createTravelPlanFormDialog'
 
 const getTravelTypeVariant = (type: string) => {
   const typeMap: Record<string, "default" | "secondary" | "destructive" | "outline"> = {
@@ -32,8 +33,10 @@ const MyTravelPlan = async () => {
           </h1>
           <p className="text-sm text-muted-foreground">
             Manage and track your upcoming adventures
+            <span className='ml-2'><CreateTravelPlanFormDialog /></span>
           </p>
         </div>
+
         <div className="flex items-center gap-2">
           <Badge variant="secondary" className="gap-1.5">
             <Plane className="h-3 w-3" />

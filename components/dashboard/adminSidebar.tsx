@@ -3,14 +3,16 @@
 import { useState } from "react";
 import { Home, MapPin, Inbox, Send, User, Settings, LogOut, X, Menu } from "lucide-react";
 import Link from "next/link";
+import LogoutButton from "../auth/LogOut";
 
 export default function AdminSidebar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const menuItems = [
     { id: "dashboard", icon: Home, label: "Home", href: "/" },
+    { id: "analytics", icon: MapPin, label: "Analytics", href: "/adminDashboard/adminAnalytics" },
     { id: "user-management", icon: User, label: "User Management", href: "/adminDashboard/userManagement" },
-    { id: "profile", icon: User, label: "Profile", href: "/adminDashboard/myProfile" },
+    { id: "profile", icon: User, label: "Profile", href: "/adminDashboard/profile" },
     { id: "settings", icon: Settings, label: "Settings", href: "#" },
   ];
 
@@ -21,7 +23,7 @@ export default function AdminSidebar() {
         <button onClick={() => setSidebarOpen(true)}>
           <Menu size={26} />
         </button>
-        <h1 className="text-xl font-semibold ml-4">TravelApp</h1>
+        <h1 className="text-xl font-semibold ml-4">Travel Express</h1>
       </div>
 
       {/* Overlay for mobile */}
@@ -41,7 +43,7 @@ export default function AdminSidebar() {
       >
         {/* Header */}
         <div className="p-4 flex justify-between items-center border-b">
-          <h1 className="font-bold text-xl">TravelApp</h1>
+          <h1 className="font-bold text-xl">Travel Express</h1>
           <button onClick={() => setSidebarOpen(false)} className="lg:hidden">
             <X />
           </button>
@@ -66,10 +68,7 @@ export default function AdminSidebar() {
 
         {/* Logout */}
         <div className="p-4 border-t">
-          <button className="flex items-center gap-3 text-red-600 hover:bg-red-50 px-4 py-2 rounded-lg">
-            <LogOut size={20} />
-            Logout
-          </button>
+          <LogoutButton />
         </div>
       </aside>
     </>

@@ -1,8 +1,10 @@
+import AdminProfile from "@/components/myprofile/adminProfile";
 
 const AdminProfilepage = () => {
   return (
     <div>
-      <h1>Hey Admin you can control All</h1>
+      <AdminProfile />
+      
 
     </div>
   )

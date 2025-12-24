@@ -7,7 +7,7 @@ const TravelPlansPage = async({ searchParams }: any) => {
   const searchParamsObj =await searchParams || {};
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen  mt-5 bg-background">
       {/* Header Section */}
       <div className="bg-gradient-to-br from-primary/5 via-background to-secondary/5 border-b border-border/50">
         <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
